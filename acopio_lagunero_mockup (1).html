@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Acopio Lagunero - Sabores de la Laguna</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lora:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f3ed;
+            color: #3d2f1f;
+        }
+
+        /* Header */
+        header {
+            background: #f5f3ed;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5537 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid #3d2f1f;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-circle::before {
+            content: 'EL ACOPIO';
+            position: absolute;
+            top: 12px;
+            font-size: 8px;
+            font-weight: 700;
+            color: #f5f3ed;
+            letter-spacing: 1px;
+        }
+
+        .logo-circle::after {
+            content: 'LAGUNERO';
+            position: absolute;
+            bottom: 12px;
+            font-size: 7px;
+            font-weight: 600;
+            color: #f5f3ed;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(245, 243, 237, 0.3);
+            border-radius: 4px;
+        }
+
+        .menu-icon {
+            width: 32px;
+            height: 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-icon span {
+            width: 100%;
+            height: 3px;
+            background: #3d2f1f;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .menu-icon.active span:nth-child(1) {
+            transform: rotate(45deg) translateY(11px);
+        }
+
+        .menu-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-icon.active span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-11px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 60px 40px;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 56px;
+            font-weight: 700;
+            color: #3d2f1f;
+            margin-bottom: 20px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 50px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Product Showcase */
+        .product-showcase {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 50px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .kraft-box {
+            width: 100%;
+            height: 420px;
+            background: linear-gradient(135deg, #d4a574 0%, #b8956a 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+            position: relative;
+            padding: 40px;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .kraft-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+        }
+
+        .kraft-box::before {
+            content: 'EL ACOPIO DE LA LAGUNA';
+            position: absolute;
+            bottom: 25px;
+            right: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(61, 47, 31, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .box-products {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .product {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product.bottle {
+            grid-row: span 2;
+            height: 160px;
+            background: linear-gradient(180deg, rgba(245,243,237,0.95) 0%, rgba(220,215,200,0.85) 100%);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+        }
+
+        .product.bottle::after {
+            content: 'SOTOL';
+            position: absolute;
+            bottom: 10px;
+            font-size: 8px;
+            color: #8b6f47;
+            font-weight: 600;
+        }
+
+        .product.bottle::before {
+            content: '';
+            width: 25px;
+            height: 75px;
+            background: linear-gradient(180deg, #8b6f47 0%, #6b5537 100%);
+            border-radius: 3px;
+        }
+
+        .product.jar {
+            height: 70px;
+            background: rgba(255, 140, 70, 0.5);
+        }
+
+        .product.mug {
+            height: 70px;
+            background: linear-gradient(135deg, #c86543 0%, #a85533 100%);
+        }
+
+        .product.candy {
+            height: 70px;
+            background: rgba(220, 170, 100, 0.6);
+            border-radius: 50%;
+        }
+
+        .product.grain {
+            height: 70px;
+            background: rgba(180, 140, 100, 0.5);
+        }
+
+        .product.extra {
+            height: 70px;
+            background: rgba(150, 120, 90, 0.4);
+        }
+
+        /* Plans Section */
+        .plans-section {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            animation: fadeInUp 1.4s ease;
+        }
+
+        .plan-card {
+            background: white;
+            border: 2px solid #8b6f47;
+            border-radius: 16px;
+            padding: 24px 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plan-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: #8b6f47;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .plan-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 8px 24px rgba(139, 111, 71, 0.25);
+            border-color: #6b5537;
+        }
+
+        .plan-card:hover::before {
+            transform: scaleY(1);
+        }
+
+        .plan-card.selected {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5537 100%);
+            color: #f5f3ed;
+            border-color: #3d2f1f;
+        }
+
+        .plan-card.selected .plan-title,
+        .plan-card.selected .plan-price,
+        .plan-card.selected .plan-desc {
+            color: #f5f3ed;
+        }
+
+        .plan-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .plan-title {
+            font-family: 'Lora', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: #3d2f1f;
+        }
+
+        .plan-price {
+            font-size: 22px;
+            font-weight: 700;
+            color: #8b6f47;
+        }
+
+        .plan-desc {
+            font-size: 14px;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        .plan-badge {
+            display: inline-block;
+            background: #8b6f47;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .plan-card.selected .plan-badge {
+            background: #f5f3ed;
+            color: #3d2f1f;
+        }
+
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5537 100%);
+            color: #f5f3ed;
+            padding: 20px 60px;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(139, 111, 71, 0.35);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            animation: fadeInUp 1.6s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(139, 111, 71, 0.45);
+            background: linear-gradient(135deg, #6b5537 0%, #5b4527 100%);
+        }
+
+        .cta-button:active {
+            transform: translateY(-1px);
+        }
+
+        .cta-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: white;
+            padding: 80px 40px;
+            margin-top: 60px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5537 100%);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 6px 20px rgba(139, 111, 71, 0.3);
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            color: #3d2f1f;
+            margin-bottom: 12px;
+        }
+
+        .feature-text {
+            font-size: 15px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            background: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-top: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            bottom: 0;
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 12px;
+        }
+
+        .nav-item:hover {
+            color: #8b6f47;
+            background: rgba(139, 111, 71, 0.05);
+        }
+
+        .nav-item.active {
+            color: #8b6f47;
+        }
+
+        .nav-icon {
+            width: 28px;
+            height: 28px;
+            background: #ccc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item.active .nav-icon {
+            background: linear-gradient(135deg, #8b6f47 0%, #6b5537 100%);
+        }
+
+        .nav-item:hover .nav-icon {
+            transform: scale(1.1);
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            border-left: 4px solid #8b6f47;
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification-title {
+            font-weight: 600;
+            color: #3d2f1f;
+            margin-bottom: 5px;
+        }
+
+        .notification-text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .hero-section {
+                padding: 40px 20px;
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .kraft-box {
+                height: 320px;
+                padding: 25px;
+            }
+
+            .box-products {
+                gap: 12px;
+                max-width: 300px;
+            }
+
+            .product.bottle {
+                height: 120px;
+            }
+
+            .product.jar,
+            .product.mug,
+            .product.candy,
+            .product.grain,
+            .product.extra {
+                height: 54px;
+            }
+
+            .plan-card {
+                padding: 18px 20px;
+            }
+
+            .plan-title {
+                font-size: 16px;
+            }
+
+            .plan-price {
+                font-size: 18px;
+            }
+
+            .cta-button {
+                width: 100%;
+                padding: 18px 30px;
+                font-size: 16px;
+            }
+
+            .features-section {
+                padding: 50px 20px;
+            }
+
+            .notification {
+                right: 20px;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-circle">
+            <div class="logo-icon"></div>
+        </div>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1 class="hero-title">El Origen Viaja hasta Ti</h1>
+        <p class="hero-subtitle">Descubre la riqueza artesanal de La Laguna en cada caja. Productos auténticos seleccionados con pasión por artesanos locales.</p>
+
+        <!-- Product Showcase -->
+        <div class="product-showcase">
+            <div class="kraft-box">
+                <div class="box-products">
+                    <div class="product bottle"></div>
+                    <div class="product jar"></div>
+                    <div class="product mug"></div>
+                    <div class="product candy"></div>
+                    <div class="product grain"></div>
+                    <div class="product extra"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plans -->
+        <div class="plans-section">
+            <div class="plan-card" onclick="selectPlan(this, 'mensual')">
+                <div class="plan-header">
+                    <span class="plan-title">PLAN MENSUAL</span>
+                    <span class="plan-price">$850 MXN</span>
+                </div>
+                <p class="plan-desc">Caja inventa de sabores regionales. Productos artesanales cuidadosamente seleccionados cada mes.</p>
+                <span class="plan-badge">Más Popular</span>
+            </div>
+            
+            <div class="plan-card" onclick="selectPlan(this, 'trimestral')">
+                <div class="plan-header">
+                    <span class="plan-title">PLAN TRIMESTRAL</span>
+                    <span class="plan-price">$2,400 MXN</span>
+                </div>
+                <p class="plan-desc">Caja aroza de sabores caffee regionales. Ahorra $150 MXN con el plan trimestral.</p>
+                <span class="plan-badge">Mejor Valor</span>
+            </div>
+        </div>
+
+        <button class="cta-button" onclick="subscribe()">Seleccionar Plan</button>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3 class="feature-title">Artesanal</h3>
+                <p class="feature-text">Productos hechos a mano por artesanos locales que preservan las tradiciones de La Laguna</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3 class="feature-title">Auténtico</h3>
+                <p class="feature-text">Sabores genuinos y tradiciones culturales que cuentan la historia de nuestra región</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon"></div>
+                <h3 class="feature-title">Mensual</h3>
+                <p class="feature-text">Una nueva experiencia culinaria y cultural cada mes directo a tu puerta</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" onclick="setActiveNav(this)">
+            <div class="nav-icon"></div>
+            <span>Inicio</span>
+        </div>
+        <div class="nav-item" onclick="setActiveNav(this)">
+            <div class="nav-icon"></div>
+            <span>Cajas</span>
+        </div>
+        <div class="nav-item" onclick="setActiveNav(this)">
+            <div class="nav-icon"></div>
+            <span>Artesanos</span>
+        </div>
+        <div class="nav-item" onclick="setActiveNav(this)">
+            <div class="nav-icon"></div>
+            <span>Perfil</span>
+        </div>
+    </nav>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-title">¡Excelente elección!</div>
+        <div class="notification-text">Tu plan ha sido seleccionado correctamente.</div>
+    </div>
+
+    <script>
+        let selectedPlan = null;
+
+        function toggleMenu() {
+            const menuIcon = document.querySelector('.menu-icon');
+            menuIcon.classList.toggle('active');
+        }
+
+        function selectPlan(element, planType) {
+            // Remove selected class from all plans
+            document.querySelectorAll('.plan-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked plan
+            element.classList.add('selected');
+            selectedPlan = planType;
+            
+            showNotification();
+        }
+
+        function subscribe() {
+            if (!selectedPlan) {
+                alert('Por favor selecciona un plan primero');
+                return;
+            }
+            
+            alert(`¡Gracias por tu interés en el plan ${selectedPlan}! Redirigiendo al proceso de pago...`);
+        }
+
+        function setActiveNav(element) {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Add scroll animation
+        window.addEventListener('scroll', () => {
+            const elements = document.querySelectorAll('.feature-card');
+            elements.forEach(element => {
+                const position = element.getBoundingClientRect();
+                if (position.top < window.innerHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Initialize feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease';
+        });
+    </script>
+</body>
+</html>
